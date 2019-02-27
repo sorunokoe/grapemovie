@@ -1,0 +1,34 @@
+{
+  "name": "grapemovie",
+  "version": "1.0.0",
+  "description": "GrapeMovie is a website about movies. ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./node_modules/.bin/nodemon delay 2.5 index.js"
+  },
+  "author": "Salgara Yeskendir",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "connect": "^3.6.6",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "csurf": "^1.9.0",
+    "express": "^4.16.2",
+    "express-logger": "0.0.3",
+    "helmet": "^3.13.0",
+    "jade": "^1.11.0",
+    "morgan": "^1.9.1",
+    "thinky": "^2.3.9"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.1",
+    "proxyquire": "^2.1.0",
+    "sinon-chai": "^3.2.0",
+    "supertest": "^3.3.0"
+  }
+}
