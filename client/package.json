@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "loadtest": "^3.0.4",
+    "lottie-web": "^5.4.4",
     "node-sass": "^4.9.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

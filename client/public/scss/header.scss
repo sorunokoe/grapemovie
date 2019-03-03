@@ -1,0 +1,60 @@
+$grapeRedColor: #BD104E;
+$blackHeader: #272727;
+$blackBackground: #1d1d1d;
+
+
+header{
+  background-color: $blackHeader;
+  height: 100px;
+  width:100%;
+  display: flex;
+  padding-left: 100px;
+  padding-right: 100px;
+  align-items: center;
+  justify-content: space-between;
+  h1{
+    font-size: 2em;
+    font-weight: 300;
+    color: white;
+    .brand{
+      color: $grapeRedColor;
+    }
+  }
+  .search-div{
+    position: relative;
+    .search-icon-img{
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      right: 15px;
+      top:10px;
+      cursor: pointer;
+    }
+    input{
+      border:none;
+      outline: none;
+      width:600px;
+      height: 45px;
+      border-radius: 6px;
+      font-size: 1.2em;
+      padding-left: 15px;
+      background-color: $blackBackground;
+      color: white;
+      font-weight: 300;
+    }
+    input::placeholder{
+      font-weight: 300;
+    }
+  }
+  .display-div{
+    div {
+      a{
+        text-decoration: none;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+}

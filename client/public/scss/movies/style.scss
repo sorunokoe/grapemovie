@@ -1,0 +1,141 @@
+$grapeRedColor: #BD104E;
+$blackHeader: #272727;
+$blackBackground: #1d1d1d;
+
+body{
+  background-color: $blackHeader;
+}
+
+.main-content-div{
+  width:100%;
+  min-height: 600px;
+  padding: 50px;
+  background-color: $blackBackground;
+  position: relative;
+  h2{
+    padding-left: 5%;
+  }
+  .movies-items {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-gap: 0;
+    padding-left: 5%;
+    padding-right: 5%;
+    a{
+      flex-basis: max(100%/5);
+      //width: 200px;
+      min-width: 300px;
+      margin-top: 25px;
+      margin-right: 25px;
+      height: 480px;
+      border-radius: 6px;
+      .movie-item {
+        width: 100%;
+        position: relative;
+        padding: 25px;
+        background-color: $blackHeader;
+        color: white;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        .poster-img {
+          max-width: 100%;
+          height: 250px;
+          align-self: center;
+        }
+        h3 {
+          font-size: 1.2em;
+          margin-top: 30px;
+        }
+        p {
+          font-size: 1em;
+        }
+        .add-fav-div {
+          width: 70px;
+          height: 70px;
+          border-radius: 35px;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          position: absolute;
+          right: 15px;
+          bottom: 15px;
+
+          img {
+            width: 35px;
+            height: 35px;
+          }
+        }
+
+        .add-fav-div:hover {
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        }
+      }
+      .movie-item:hover{
+        box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      }
+    }
+  }
+  .pagination-div{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    div {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      img {
+        width: 50px;
+        height: 50px;
+        color: white;
+        background: rgba(255, 255, 255, 0.06);
+        border: none;
+        outline: none;
+        padding: 7px;
+        font-size: 1em;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        color: $grapeRedColor;
+        background: none;
+      }
+      img.next {
+        color: $grapeRedColor;
+        background: none;
+        transform: rotate(180deg);
+      }
+      img:hover{
+        background: rgba(255, 255, 255, 0.07);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+      }
+      button {
+        color: white;
+        background: rgba(255, 255, 255, 0.06);
+        border: none;
+        outline: none;
+        padding: 7px;
+        font-size: 1em;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      button:hover {
+        background: rgba(255, 255, 255, 0.07);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+      }
+
+      button.active {
+        background: $grapeRedColor;
+      }
+    }
+  }
+}
+.main-content-div a.active{
+  box-shadow: 0 0 5px $grapeRedColor;
+}

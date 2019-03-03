@@ -1,8 +1,35 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:100,300,400");
 
+$grapeRedColor: #BD104E;
+$blackHeader: #272727;
+$blackBackground: #1d1d1d;
+
+
 *{
   margin:0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  color:white;
+}
+a{
+  text-decoration: none;
+}
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#svgContainer {
+  max-width: 100%;
+  max-height: 100%;
+  background-color: $blackBackground;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }

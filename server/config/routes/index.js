@@ -3,11 +3,11 @@
 var config = require('../index');
 
 module.exports = function(app){
-    app.get('/', function(req, res) {
+    app.get('/*', function(req, res) {
         res.render('index', {
             title: "Grape Movie",
-            description: "Grape Movie platform to find a movie you ever looking for",
-            keywords: "grape movie, films, movie",
+            description: "Grape Movie platform to find a movies you ever looking for",
+            keywords: "grape movies, films, movies",
             author: config.author,
             app_name: config.app_name
         });

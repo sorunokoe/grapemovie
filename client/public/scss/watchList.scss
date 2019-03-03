@@ -1,0 +1,53 @@
+$grapeRedColor: #BD104E;
+$blackHeader: #272727;
+$blackBackground: #1d1d1d;
+
+.movies-list-div{
+  width: 100%;
+  background: $blackBackground;
+  padding: 50px;
+  padding-left: 10%;
+  padding-right: 10%;
+  .movie-item-div{
+    position: relative;
+    margin-top: 25px;
+    background: $blackHeader;
+    border-radius: 6px;
+    padding: 25px;
+    display: flex;
+    overflow: hidden;
+    height: 200px;
+    img{
+      max-height: 100%;
+    }
+    .description-div{
+      margin-left: 25px;
+      h3{
+        margin-bottom: 15px;
+      }
+      p{
+        margin-top: 15px;
+      }
+      p.inline{
+        margin-right: 15px;
+        display: inline;
+      }
+    }
+    .remove-img{
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      right: 25px;
+      top:25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .remove-img:hover{
+      width: 26px;
+      height: 26px;
+    }
+  }
+  .movie-item-div:hover{
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+  }
+}

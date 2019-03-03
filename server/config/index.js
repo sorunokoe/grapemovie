@@ -7,7 +7,7 @@ var config = {
     'host': '127.0.0.1',
     'author': "Yeskendir Salgara",
     'app_name': "Grape Movie",
-    'cookieSecret': 'grape movie secret word'
+    'cookieSecret': 'grape movies secret word'
 };
 
 module.exports = config;
