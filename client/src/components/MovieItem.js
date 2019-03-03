@@ -1,13 +1,13 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { getFilms } from '../features/movies/actions/movies'
+import {getFilm} from '../features/movies/actions/movie'
 
 require("../../public/scss/movieItem/style.scss")
 
 class MovieItemComponent extends Component{
     componentDidMount(){
-        console.log(this.props.match.params.id)
+        this.props.getFilm(this.props.match.params.id)
     }
     componentDidUpdate(){
     }
@@ -16,18 +16,19 @@ class MovieItemComponent extends Component{
             <div>
                 <div className={"main-description-div"}>
                     <div className={"poster-background-div"}>
-                        <img src={"../img/poster/inter.jpg"} />
+                        <img src={this.props.image.original} />
                         <div className={"blur-layer-div"}></div>
                     </div>
                     <div className={"info-div"}>
                         <div className={"info-item-div poster"}>
-                            <img src={"../img/poster/inter.jpg"} />
+                            <img src={this.props.image.medium} />
                         </div>
                         <div className={"info-item-div"}>
-                            <h1>Interstellar</h1>
-                            <p>Year: 2001</p>
-                            <p>Rank: 9.48/10</p>
-                            <p>Director: Stanley Kubrick</p>
+                            <h1>{this.props.movie.data.name}</h1>
+                            <p>Premiered: {this.props.movie.data.premiered}</p>
+                            {/*<p>Rating: {this.props.movie.f}</p>*/}
+                            <p>Genres: {this.props.movie.data.genres}</p>
+                            <p>Language: {this.props.movie.data.language}</p>
                             <button>
                                 <img src={"../img/common/icon/star_white.svg"} />
                                 Add to wishlist
@@ -58,9 +59,10 @@ class MovieItemComponent extends Component{
     }
 }
 const mapStateToProps = state => ({
-    movie: state.movies
+    image: state.movie.data.image,
+    movie: state.movie
 });
 const mapDispatchToProps = dispatch => ({
-
+    getFilm: (id) => dispatch(getFilm(id))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MovieItemComponent);

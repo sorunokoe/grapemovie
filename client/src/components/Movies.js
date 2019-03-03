@@ -22,6 +22,8 @@ class MoviesComponent extends Component{
         animItem.onComplete  = () => {
             this.props.getFilms();
         }
+
+        console.log(this.props.movies)
     }
     previousPage(){
         if(this.props.page>0) {
@@ -29,7 +31,7 @@ class MoviesComponent extends Component{
         }
     }
     nextPage(){
-        if(this.props.page<this.props.movies.length-8) {
+        if((this.props.page+1)*8<this.props.movies.length) {
             this.choosePage(this.props.page + 1)
         }
     }
@@ -40,17 +42,15 @@ class MoviesComponent extends Component{
         const movies = this.props.movies_inpage.map((movie, index) =>
             <Link key={movie.id} to={"/movie/"+movie.id} className={movie.favs ? "active" : ""}>
                 <div className={"movie-item"} key={index}>
-                    <img className={"poster-img"} src={movie._embedded.show.image ? movie._embedded.show.image.medium : "" } />
-                    <h3>{movie._embedded.show.name}</h3>
-                    <h4>{movie.name}</h4>
+                    <img className={"poster-img"} src={movie.image.medium ? movie.image.medium : "" } />
+                    <h3>{movie.name}</h3>
+                    {/*<h4>{movie.name}</h4>*/}
                     <br/>
-                    <p>Status: {movie._embedded.show.status}</p>
-                    <p>Year: {movie.airdate}</p>
-                    <p>Rating:
-                        {
-                            movie._embedded.show.rating.average ? movie._embedded.show.rating.average : " unknown"
-                        }
+                    {/*<p>Status: {movie.status}</p>*/}
+                    {/*<p>Year: {movie.airdate}</p>*/}
+                    <p>Rating: {movie.rating.average}
                     </p>
+                    <p>Premiered: {movie.premiered}</p>
                     {
                         movie.favs ? "" :
                             <div className={"add-fav-div"}>
@@ -61,7 +61,7 @@ class MoviesComponent extends Component{
             </Link>
         )
         const pages = [];
-        for(let i = 1; i <= Math.ceil(1000 / 8); i++) {
+        for(let i = 1; i <= Math.ceil(this.props.movies.length / 8); i++) {
             pages.push(i)
         }
         return(

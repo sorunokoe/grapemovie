@@ -10,11 +10,9 @@ const loggerMiddleware = createLogger()
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
 import MoviesComponent from './components/Movies';
-import movieReducer from './features/movies/reducers';
-
 import MovieItemComponent from './components/MovieItem';
-
 import WatchlistComponent from './components/Watchlist';
+import movieReducer from './features/movies/reducers';
 
 require('../public/scss/style.scss');
 require('../public/scss/header.scss');

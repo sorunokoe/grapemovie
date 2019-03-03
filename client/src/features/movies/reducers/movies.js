@@ -4,7 +4,7 @@ import {
 } from '../actions/movies';
 
 const movies  = {isLoaded: false, data: [], movies_inpage: [], page: 0};
-export default function movieReducer(state=movies, action){
+export default function moviesReducer(state=movies, action){
     switch (action.type) {
         case CHANGE_PAGE:
             console.log("from", action.page)

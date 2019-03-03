@@ -21,13 +21,14 @@ body{
     grid-gap: 0;
     padding-left: 5%;
     padding-right: 5%;
+    margin-bottom: 100px;
     a{
       flex-basis: max(100%/5);
       //width: 200px;
       min-width: 300px;
       margin-top: 25px;
       margin-right: 25px;
-      height: 480px;
+      height: 420px;
       border-radius: 6px;
       .movie-item {
         width: 100%;

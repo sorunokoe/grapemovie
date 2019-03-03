@@ -2,7 +2,6 @@
 export const GET_FILMS = '[MOVIES] GET_FILMS';
 export const CHANGE_PAGE = '[MOVIES] CHANGE_PAGE';
 
-
 function receiveFilms(movies){
     return {
         type: GET_FILMS,
@@ -19,9 +18,8 @@ export function changePage(page) {
     }
 }
 export function getFilms() {
-    console.log("hello");
     return async (dispatch) => {
-        await fetch("http://api.tvmaze.com/schedule/full")
+        await fetch("http://api.tvmaze.com/shows")
             .then(response => response.json())
             .then( async (result) => {
                 return await dispatch(receiveFilms(result))
@@ -31,5 +29,3 @@ export function getFilms() {
             })
     }
 }
-
-
