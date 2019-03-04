@@ -1,6 +1,6 @@
 
 
-export const GET_FILM = '[MOVIES] GET_FILM';
+export const GET_FILM = '[MOVIE] GET_FILM';
 
 function receiveFilm(movie){
     return {

@@ -1,45 +1,93 @@
 import React, {Component} from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Switch
-} from 'react-router-dom'
+import {createStore, applyMiddleware} from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger'
+const loggerMiddleware = createLogger()
 
+import { Route, Link, BrowserRouter as Router, withRouter } from 'react-router-dom'
 
-import {applyMiddleware, createStore} from "redux";
-import thunkMiddleware from "redux-thunk";
-import {createLogger} from "redux-logger";
-const loggerMiddleware = createLogger();
+import MoviesComponent from '../components/Movies';
+import MovieItemComponent from '../components/MovieItem';
+import WatchlistComponent from '../components/Watchlist';
+import SearchComponent from '../components/Search';
+import HeaderComponent from '../components/Header';
+import AuthRegComponent from './AuthReg';
 
-import MoviesComponent from './Movies';
 import movieReducer from '../features/movies/reducers';
-const store = createStore(movieReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
-
-import MovieItemComponent from './MovieItem';
-import {Provider} from "react-redux";
+import userReducer from '../features/users/reducers';
 
 require('../../public/scss/style.scss');
 require('../../public/scss/header.scss');
 require('../../public/scss/footer.scss');
 
-class App extends Component {
-    render() {
-        return(
-        <Router>
-            <div>
-                <Switch>
+const movieStore = createStore(movieReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const userStore = createStore(userReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
-                    <Provider store={store}>
+class App extends Component {
+    render(){
+        return(<Router>
+                <div>
+                    <Provider store={userStore}>
+                        <HeaderComponent/>
+                    </Provider>
+                    <Provider store={movieStore}>
                         <Route exact path="/" component={MoviesComponent} />
                     </Provider>
-                    <Route path="/movie" component={MovieItemComponent} />
-                    {/*<Provider store={store}>*/}
-                        {/**/}
-                    {/*</Provider>*/}
-                </Switch>
-            </div>
-        </Router>
+                    <Provider store={movieStore}>
+                        <Route path="/movie/:id" component={MovieItemComponent} />
+                    </Provider>
+                    <Provider store={movieStore}>
+                        <Route path="/search/:text" component={SearchComponent} />
+                    </Provider>
+                    <Provider store={movieStore}>
+                        <Route path="/watchlist" component={WatchlistComponent} />
+                    </Provider>
+                    <Provider store={userStore}>
+                        <Route path="/login/:type" component={AuthRegComponent} />
+                    </Provider>
+                    <footer>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href={"#"}>
+                                        Terms of use
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={"#"}>
+                                        Privacy
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href={"#"}>Cookie Preferences</a>
+                                </li>
+                                <li>
+                                    <a href={"#"}>FAQ</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href={"#"}>
+                                        Corporate Information
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={"#"}>
+                                        Help Center
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </footer>
+                </div>
+            </Router>
         )
     }
 }

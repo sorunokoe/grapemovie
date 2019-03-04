@@ -8,7 +8,8 @@ var cors = require("cors");
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config');
-var routes = require('./config/routes');
+var routes = require('./api/routes');
+const mongoose = require('mongoose');
 
 var app = express();
 app.set('views', __dirname+'/views')
@@ -30,6 +31,22 @@ app.use(compression());
 app.set('port', process.env.PORT || config.ports.http);
 app.use(express.static(__dirname + './../client/public'));
 
+
+mongoose.connect("mongodb://sorunokoe:"
+    + process.env.MONGO_ATLAS_PASSWORD
+    +"@cluster0-shard-00-00-c3wec.mongodb.net:27017,cluster0-shard-00-01-c3wec.mongodb.net:27017,cluster0-shard-00-02-c3wec.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true",
+    { useNewUrlParser: true })
+    .then(() => {
+        console.log("mongodb connect: success")
+    })
+    .catch((err) => {
+        console.log("mongodb connect: error")
+        console.log(err)
+        throw err;
+    });
+
+
+app.set('secretKey', 'grapeSecretKey');
 routes(app);
 
 switch(app.get('env')){

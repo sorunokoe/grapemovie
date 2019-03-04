@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "html-to-react": "^1.3.4",
     "loadtest": "^3.0.4",
     "lottie-web": "^5.4.4",
     "node-sass": "^4.9.3",

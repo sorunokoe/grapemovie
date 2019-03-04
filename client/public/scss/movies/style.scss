@@ -16,16 +16,19 @@ body{
     padding-left: 5%;
   }
   .movies-items {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-gap: 0;
+    //display: grid;
+    //grid-template-columns: 25% 25% 25% 25%;
+    //grid-gap: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     padding-left: 5%;
     padding-right: 5%;
     margin-bottom: 100px;
     a{
-      flex-basis: max(100%/5);
+      //flex-basis: max(100%/5);
       //width: 200px;
-      min-width: 300px;
+      width: 300px;
       margin-top: 25px;
       margin-right: 25px;
       height: 420px;
