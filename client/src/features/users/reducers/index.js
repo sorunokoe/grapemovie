@@ -1,22 +1,8 @@
 
-import {
-    SIGN_IN, SIGN_UP
-} from '../actions';
+import {combineReducers} from 'redux';
 
-const user  = {isLoaded: false, data: {}};
+import users from './users';
 
-export default function movieReducer(state=user, action){
-    switch (action.type) {
-        case SIGN_IN:
-            return {
-                isLoaded: action.isLoaded,
-                data: action.data
-            }
-        case SIGN_UP:
-            return {
-                isLoaded: action.isLoaded,
-                data: action.data
-            }
-    }
-    return state;
-}
+export default combineReducers({
+    users
+});

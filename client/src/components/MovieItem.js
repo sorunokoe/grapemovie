@@ -1,7 +1,8 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getFilm} from '../features/movies/actions/movie'
+import {getFilm, addToFavorites} from '../features/movies/actions/movie'
+import {getFavorites} from '../features/movies/actions/movies'
 var HtmlToReactParser = require('html-to-react').Parser;
 
 require("../../public/scss/movieItem/style.scss")
@@ -9,10 +10,25 @@ require("../../public/scss/movieItem/style.scss")
 class MovieItemComponent extends Component{
     componentDidMount(){
         this.props.getFilm(this.props.match.params.id)
+        this.props.getFavorites()
     }
     componentDidUpdate(){
     }
+    addFav(e){
+        if(this.props.movie.data) {
+            this.props.addToFavorites(this.props.movie.data)
+        }
+    }
     render(){
+        var isItFav = false
+        this.props.favorites.forEach((movie) => {
+            if(movie.id == this.props.match.params.id){
+                isItFav = true
+            }
+        })
+        if(this.props.movie.favorite.id == this.props.movie.data.id){
+            isItFav = true
+        }
         var htmlToReactParser = new HtmlToReactParser();
         return(
             <div>
@@ -31,10 +47,12 @@ class MovieItemComponent extends Component{
                             {/*<p>Rating: {this.props.movie.f}</p>*/}
                             <p>Genres: {this.props.movie.data.genres? this.props.movie.data.genres.join(', ') : ""}</p>
                             <p>Language: {this.props.movie.data.language}</p>
-                            <button>
-                                <img src={"../img/common/icon/star_white.svg"} />
-                                Add to wishlist
-                            </button>
+                            { isItFav ? "" :
+                                <button onClick={this.addFav.bind(this)}>
+                                    <img src={"../img/common/icon/star_white.svg"} />
+                                    Add to wishlist
+                                </button>
+                            }
                         </div>
                     </div>
                     <div className={"description-div"}>
@@ -46,9 +64,12 @@ class MovieItemComponent extends Component{
     }
 }
 const mapStateToProps = state => ({
-    movie: state.movie
+    movie: state.movie,
+    favorites: state.movies.favorites.data.movies
 });
 const mapDispatchToProps = dispatch => ({
-    getFilm: (id) => dispatch(getFilm(id))
+    getFilm: (id) => dispatch(getFilm(id)),
+    addToFavorites: (movie) => dispatch(addToFavorites(movie)),
+    getFavorites: () => dispatch(getFavorites())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MovieItemComponent);

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { signIn, signUp } from '../features/users/actions'
 import {Link} from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 require("../../public/scss/authreg.scss")
 
@@ -10,7 +11,13 @@ class AuthRegComponent extends Component{
     componentDidMount() {
         this.refs.submit.value = this.props.match.params.type == "reg" ? "Sign Up" : "Sign In"
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
+        if(this.props.user.data.data){
+            const cookies = new Cookies();
+            if(cookies.get("token")){
+                this.props.history.push("/")
+            }
+        }
         this.refs.submit.value = this.props.match.params.type == "reg" ? "Sign Up" : "Sign In"
     }
     login(e){
@@ -59,6 +66,8 @@ class AuthRegComponent extends Component{
         return(
             <div className={"auth-main-div"}>
                 <div className={"auth-block-div"}>
+                    <p>{this.props.user ? this.props.user.data.message : ""}</p>
+                    <br/>
                     <form onSubmit={this.login.bind(this)}>
                         <div className={"credential-div"}>
                             <p>Email</p>
@@ -78,7 +87,7 @@ class AuthRegComponent extends Component{
     }
 }
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.users
 });
 const mapDispatchToProps = dispatch => ({
     signIn: (data) => dispatch(signIn(data)),

@@ -6,15 +6,6 @@ const movies = require('./movie') ;
 const users = require('./user');
 
 module.exports = function(app){
-    app.get('/', function(req, res) {
-        res.render('index', {
-            title: "Grape Movie",
-            description: "Grape Movie platform to find a movies you ever looking for",
-            keywords: "grape movies, films, movies",
-            author: config.author,
-            app_name: config.app_name
-        });
-    });
     app.use('/api/users', users)
     app.use('/api/movies', validateUser, movies);
     function validateUser(req, res, next) {
@@ -26,8 +17,16 @@ module.exports = function(app){
                 next();
             }
         });
-
     }
+    app.get('*', function(req, res) {
+        res.render('index', {
+            title: "Grape Movie",
+            description: "Grape Movie platform to find a movies you ever looking for",
+            keywords: "grape movies, films, movies",
+            author: config.author,
+            app_name: config.app_name
+        });
+    });
     app.use(function(req, res, next){
         res.status(404);
         res.render('404');

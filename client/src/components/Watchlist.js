@@ -1,51 +1,54 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { getFilms } from '../features/movies/actions/movies'
+import { getFavorites, removeFavorite } from '../features/movies/actions/movies'
 import {Link} from "react-router-dom";
+var HtmlToReactParser = require('html-to-react').Parser;
 
 require("../../public/scss/watchList.scss")
 
 class WatchlistComponent extends Component{
     componentDidMount(){
-        console.log(this.props.match.params.id)
+        this.props.getFavorites()
     }
     componentDidUpdate(){
+        console.log("NARUTO", this.props.favorites)
+    }
+    removeFav(id){
+        this.props.removeFavorite(id)
     }
     render(){
+        var htmlToReactParser = new HtmlToReactParser();
+        const favorites = this.props.favorites.map((film, index) =>
+            <Link key={film.id} to={"/movie/"+film.id} className={film.favs ? "active" : ""}>
+                <div className={"movie-item-div"}>
+                    <img src={film.image}/>
+                    <div className={"description-div"}>
+                        <h3>{film.name}</h3>
+                        <p className={"inline"}>Rating: {film.rating}</p>
+                        <p className={"inline"}>Premiered: {film.premiered}</p>
+                        <br/>
+                        {htmlToReactParser.parse(film.summary)}
+                    </div>
+                    {/*<img onClick={this.removeFav.bind(this, film.id)} className={"remove-img"} src={"../img/common/icon/cancel.svg"} />*/}
+                </div>
+            </Link>
+        )
         return(
             <div>
                 <div className={"movies-list-div"}>
                     <h2>Watchlist:</h2>
-                    {this.props.movie.map((film, index) =>
-                    <Link key={film.id} to={"/movie/"+film.id} className={film.favs ? "active" : ""}>
-                        <div className={"movie-item-div"}>
-                            <img src={film.img}/>
-                            <div className={"description-div"}>
-                                <h3>{film.title}</h3>
-                                <p className={"inline"}>Year: {film.year}</p>
-                                <p className={"inline"}>Rank: {film.rank}</p>
-                                <p className={"inline"}>Director: {film.director}</p>
-                                <br/>
-                                <p>
-                                    2001: A Space Odyssey is a 1968 epic science fiction film produced and directed by
-                                    Stanley Kubrick. The screenplay was written by Kubrick and Arthur C. Clarke,
-                                    and was inspired by Clarke's short story "The Sentinel".
-                                </p>
-                            </div>
-                            <img className={"remove-img"} src={"../img/common/icon/cancel.svg"} />
-                        </div>
-                    </Link>
-                    )}
+                    {favorites}
                 </div>
             </div>
         )
     }
 }
 const mapStateToProps = state => ({
-    movie: state.movies
+    favorites: state.movies.favorites.data.movies
 });
 const mapDispatchToProps = dispatch => ({
-
+    getFavorites: () => dispatch(getFavorites()),
+    removeFavorite: (id) => dispatch(removeFavorite(id))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(WatchlistComponent);

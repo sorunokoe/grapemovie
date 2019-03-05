@@ -14,7 +14,7 @@ const userSchema  = mongoose.Schema({
         type: String,
         required: [true, 'Password is required']
     },
-    movies: [movie.schema]
+    favorites: [movie.schema]
 });
 
 userSchema.pre('save', function(next){

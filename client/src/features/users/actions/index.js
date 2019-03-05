@@ -1,8 +1,13 @@
 
 export const SIGN_IN = '[USERS] SIGN_IN';
 export const SIGN_UP = '[USERS] SIGN_UP';
+import Cookies from 'universal-cookie';
 
 function getUser(user){
+    if(user.data){
+        const cookies = new Cookies();
+        cookies.set('token', user.data.token, {path: '/'});
+    }
     return {
         type: SIGN_IN,
         isLoaded: true,
@@ -21,7 +26,6 @@ export function signIn(data) {
         await fetch("http://localhost:3030/api/users/authenticate", {
             method: 'post',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -41,7 +45,6 @@ export function signUp(data) {
         await fetch("http://localhost:3030/api/users/register", {
             method: 'post',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)

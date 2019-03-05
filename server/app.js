@@ -18,14 +18,17 @@ app.set('view cache', true);
 app.enable('trust proxy');
 app.use(morgan("common"));
 app.use(helmet());
-app.use(cors());
-app.use(compression());
-
+app.use(cors({
+    origin: "*",
+    credentials: true
+}));
 require('./config/domain')(app)
 require('./config/cluster')(app)
 
 app.use(cookieParser(config.cookieSecret));
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(compression());
 
 app.set('port', process.env.PORT || config.ports.http);

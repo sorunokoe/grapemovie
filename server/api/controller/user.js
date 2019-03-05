@@ -20,7 +20,7 @@ module.exports = {
                         else {
                             res.json({
                                 status: "success",
-                                message: "User added successfully!!!",
+                                message: "User added successfully!",
                                 data: result
                             });
                         }
@@ -35,6 +35,9 @@ module.exports = {
             .catch(next)
     },
     authenticate: function(req, res, next) {
+
+        console.log(req.body.email)
+
         userModel.findOne({email: req.body.email}, function(err, userInfo){
             if (err) {
                 next(err);
@@ -42,12 +45,12 @@ module.exports = {
                 if (userInfo) {
                     if (bcrypt.compareSync(req.body.password, userInfo.password)) {
                         const token = jwt.sign({id: userInfo._id}, req.app.get('secretKey'), {expiresIn: '1h'});
-                        res.json({status: "success", message: "user found!!!", data: {user: userInfo, token: token}});
+                        res.json({status: "success", data: {user: userInfo, token: token}});
                     } else {
-                        res.json({status: "error", message: "Invalid email/password!!!", data: null});
+                        res.json({status: "error", message: "Invalid email/password!", data: null});
                     }
                 }else{
-                    res.json({status: "error", message: "Invalid email/password!!!", data: null});
+                    res.json({status: "error", message: "Invalid email/password!", data: null});
                 }
             }
         });

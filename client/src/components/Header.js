@@ -2,8 +2,13 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class HeaderComponent extends Component{
+    componentDidMount() {
+
+    }
     _handleKeyPress(e){
         if (e.key === 'Enter') {
             this.search()
@@ -27,15 +32,19 @@ class HeaderComponent extends Component{
                     <input onKeyPress={this._handleKeyPress.bind(this)} ref={"searchText"} placeholder={"Search film.."} type={"text"} />
                 </div>
                 <div className={"display-div"}>
-                    <Link to={"/login/auth"}>
-                        Sign in
-                    </Link>
-                    <Link to={"/login/reg"}>
-                        Sign up
-                    </Link>
-                    <Link to={"/watchlist"}>
-                        <img src={"../img/common/icon/wishlist.svg"} />
-                    </Link>
+                    { this.props.user.data && cookies.get("token") ?
+                        <Link to={"/watchlist"}>
+                            <img src={"../img/common/icon/wishlist.svg"} />
+                        </Link> :
+                        <div>
+                            <Link to={"/login/auth"}>
+                                Sign in
+                            </Link>
+                            <Link to={"/login/reg"}>
+                            Sign up
+                            </Link>
+                        </div>
+                    }
                 </div>
             </header>
         )
@@ -43,7 +52,7 @@ class HeaderComponent extends Component{
 }
 
 const mapStateToProps = state => ({
-
+    user: state.users
 });
 const mapDispatchToProps = dispatch => ({
 
