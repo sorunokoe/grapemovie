@@ -21,7 +21,7 @@
     "express-logger": "0.0.3",
     "helmet": "^3.13.0",
     "jade": "^1.11.0",
-    "jsonwebtoken": "^8.5.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
     "thinky": "^2.3.9"
